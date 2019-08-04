@@ -6,6 +6,13 @@
       :zoom="3"
       :class="{hide: loading}"
     >
+      <gmap-marker
+        :position="marker.position"
+        :clickable="true"
+        :draggable="true"
+        @click="center=marker.position"
+      >
+      </gmap-marker>
     </gmap-map>
   </div>
 </template>
@@ -13,15 +20,22 @@
 <script>
 export default {
   name: "GoogleMap",
+  props: {
+    issLocation: Object,
+  },
   data: () => {
     return {
       center: { lat: 0, lng: 0 },
       loading: false,
+      marker: {
+        position: {lat: 23, lng: -120 },
+      }
     };
   },
 
   mounted() {
-    this.geolocate();
+    console.log(this.issLocation)
+    // this.geolocate();
   },
 
   methods: {
@@ -34,6 +48,16 @@ export default {
         };
         this.loading = false;
       });
+    },
+    setISSLocation: function(issLocation) {
+      this.center = issLocation
+      this.marker.position = issLocation
+    }
+  },
+
+  watch: {
+    issLocation() {
+      this.setISSLocation(this.issLocation)
     }
   }
 };
