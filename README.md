@@ -27,3 +27,6 @@ yarn run lint
 
 ### Customize configuration
 See [Configuration Reference](https://cli.vuejs.org/config/).
+
+### SETUP GOOGLE MAP API KEY
+`cp env.local.sample .env.local` and fill the key
