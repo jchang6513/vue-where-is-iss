@@ -3,13 +3,12 @@
     <gmap-map
       class="gmap-map"
       :center="center"
-      :zoom="3"
+      :zoom="2"
       :class="{hide: loading}"
     >
       <gmap-marker
         :position="marker.position"
-        :clickable="true"
-        :draggable="true"
+        :icon="{ url: require('../assets/satellite.svg')}"
         @click="center=marker.position"
       >
       </gmap-marker>
@@ -32,12 +31,6 @@ export default {
       }
     };
   },
-
-  mounted() {
-    console.log(this.issLocation)
-    // this.geolocate();
-  },
-
   methods: {
     geolocate: function() {
       this.loading = true;
@@ -50,11 +43,10 @@ export default {
       });
     },
     setISSLocation: function(issLocation) {
-      this.center = issLocation
+      this.center.lng = issLocation.lng
       this.marker.position = issLocation
     }
   },
-
   watch: {
     issLocation() {
       this.setISSLocation(this.issLocation)

@@ -3,23 +3,27 @@
     <GoogleMap
       :iss-location="issLocation"
     />
+    <LiveStream />
   </div>
 </template>
 
 <script>
 import GoogleMap from './components/GoogleMap';
+import LiveStream from './components/LiveStream';
 import axios from 'axios';
 
 export default {
   name: 'app',
   components: {
-    GoogleMap
+    GoogleMap,
+    LiveStream
   },
   data: () => ({
     issLocation: {lat: 0, lng: 0},
   }),
   mounted() {
     this.getISS();
+    setInterval(this.getISS, 5000);
   },
   methods: {
     getISS: function() {
